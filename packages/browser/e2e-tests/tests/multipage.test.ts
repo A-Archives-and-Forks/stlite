@@ -2,7 +2,7 @@ import { test, expect, FIRST_VIEW_TIMEOUT } from "../test-utils";
 
 test.describe("Multipage App Test", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/multipage/");
+    await page.goto("/multipage/index.html");
 
     // First view: the main page title should be visible when the app is loaded
     await expect(page.locator('h1:has-text("Main page")')).toBeVisible({

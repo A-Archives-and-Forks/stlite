@@ -5,7 +5,7 @@ test.describe("Requirements Installation Test", () => {
   test.setTimeout(180_000);
 
   test.beforeEach(async ({ page }) => {
-    await page.goto("/requirements/");
+    await page.goto("/requirements/index.html");
 
     // Wait for the app to load (longer timeout due to package installation)
     await expect(page.locator('h1:has-text("Requirements Demo")')).toBeVisible({

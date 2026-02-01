@@ -2,7 +2,7 @@ import { test, expect, FIRST_VIEW_TIMEOUT } from "../test-utils";
 
 test.describe("SharedWorker Mode Test", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/shared-worker/");
+    await page.goto("/shared-worker/index.html");
 
     // First view: the title should be visible when the app is loaded
     await expect(page.locator('h1:has-text("SharedWorker Demo")')).toBeVisible({
