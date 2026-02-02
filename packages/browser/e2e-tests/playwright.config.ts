@@ -8,7 +8,8 @@ const __dirname = path.dirname(__filename);
 const isCI = !!process.env.CI;
 
 // Stlite tests require longer timeouts due to Pyodide loading time.
-const timeout = 90_000;
+// CI uses longer timeouts for additional buffer.
+const timeout = isCI ? 60_000 : 30_000;
 
 const pagesDir = path.resolve(__dirname, "pages-dist");
 const fileProtocolBaseURL = pathToFileURL(pagesDir).href + "/";
