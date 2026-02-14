@@ -41,3 +41,32 @@ test.describe("Custom Element Stlite Browser Test", () => {
     await expectNoDeadLinks();
   });
 });
+
+// Skip for file:// protocol - fetching external files via src attribute
+// doesn't work due to browser CORS restrictions
+test.describe("Source Attribute Test", () => {
+  test("should load app from src attribute", async ({
+    page,
+    expectNoDeadLinks,
+  }, testInfo) => {
+    test.skip(
+      testInfo.project.name.includes("file-protocol"),
+      "src attribute requires HTTP(S) to fetch external files",
+    );
+
+    await page.goto("/src-attribute/index.html");
+
+    // Wait for the Streamlit app to load
+    await expect(
+      page.locator('h1:has-text("Source Attribute Test")'),
+    ).toBeVisible({ timeout: FIRST_VIEW_TIMEOUT });
+
+    // Check that the content from the external file is rendered
+    await expect(
+      page.locator('text="This app was loaded from a src attribute!"'),
+    ).toBeVisible();
+
+    // Check for dead links
+    await expectNoDeadLinks();
+  });
+});
